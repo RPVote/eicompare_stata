@@ -1,0 +1,7 @@
+v 1.0.0
+d eicompare_stata
+d Stata wrappers for the eiCompare R package
+d Loren Collingwood, University of New Mexico
+d lcollingwood@unm.edu
+d https://github.com/RPVote/eiCompare
+p eicompare_stata
