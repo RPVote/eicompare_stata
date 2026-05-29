@@ -1,6 +1,6 @@
-*! ei_plot v1.0.0 - Visualize EI results via eiCompare
+*! ei_plot v1.0.1 - Visualize EI results via eiCompare
 *! Author: Loren Collingwood
-*! Date: 2026-05-21
+*! Date: 2026-05-28
 
 program define ei_plot
     version 14.0
@@ -138,17 +138,18 @@ program define ei_plot
             if (!is.null(rxc_res)) results[["RxC"]] <- rxc_res; ///
             if (length(results) == 0) stop("No methods succeeded for plotting."); ///
             p <- tryCatch( ///
-                plot(results, cand_cols=cands, race_cols=races), ///
+                do.call(plot, unname(results)), ///
                 error = function(e) { ///
                     comp <- do.call(rbind, lapply(names(results), function(nm) { ///
-                        df <- as.data.frame(results[[nm]]); ///
+                        df <- results[[nm]]$estimates; ///
                         df$method <- nm; ///
                         df ///
                     })); ///
-                    ggplot(comp, aes(x=rownames(comp), y=as.numeric(comp[,1]))) + ///
-                        geom_bar(stat="identity") + ///
+                    ggplot(comp, aes(x=cand, y=mean, fill=method)) + ///
+                        geom_bar(stat="identity", position="dodge") + ///
+                        facet_wrap(~race) + ///
                         theme_minimal() + ///
-                        labs(title="EI Comparison") ///
+                        labs(title="EI Comparison", y="Estimate", x="Candidate") ///
                 } ///
             ); ///
             ggsave("`saving_r'", plot=p, width=`width', height=`height'); ///

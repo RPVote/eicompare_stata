@@ -19,7 +19,7 @@ The package also provides commands for side-by-side method comparison and visual
 | Stata | 14.0+ |
 | R | 4.0+ |
 | `rcall` (Stata) | latest |
-| `eiCompare` (R) | 3.0+ |
+| `eiCompare` (R) | 3.0.6+ |
 
 ## Installation
 

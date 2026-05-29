@@ -1,4 +1,4 @@
-v 1.0.0
+v 1.0.1
 d eicompare_stata: Stata interface to the eiCompare R package
 d
 d Provides Stata commands for ecological inference (EI) analysis
@@ -11,7 +11,7 @@ d
 d Author: Loren Collingwood, University of New Mexico
 d Support: lcollingwood@unm.edu
 d
-d Distribution-Date: 20260521
+d Distribution-Date: 20260528
 d
 f ado/ei_setup.ado
 f ado/ei_good.ado

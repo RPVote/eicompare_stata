@@ -1,6 +1,6 @@
-*! ei_compare v1.0.0 - Compare EI methods via eiCompare
+*! ei_compare v1.0.1 - Compare EI methods via eiCompare
 *! Author: Loren Collingwood
-*! Date: 2026-05-21
+*! Date: 2026-05-28
 
 program define ei_compare, rclass
     version 14.0
@@ -148,24 +148,24 @@ program define ei_compare, rclass
             if (!is.null(rxc_res)) results_list[["RxC"]] <- rxc_res; ///
         }; ///
         if (length(results_list) > 1) { ///
-            comp <- tryCatch( ///
-                ei_rc_good_table(results_list, cand_cols=cands, race_cols=races), ///
-                error = function(e) { ///
-                    cat("  Comparison table error:", e$message, "\n"); ///
-                    do.call(rbind, lapply(names(results_list), function(nm) { ///
-                        df <- as.data.frame(results_list[[nm]]); ///
-                        df$method <- nm; ///
-                        df ///
-                    })) ///
-                } ///
-            ); ///
+            comp <- tryCatch({ ///
+                do.call(rbind, lapply(names(results_list), function(nm) { ///
+                    df <- results_list[[nm]]$estimates; ///
+                    df$method <- nm; ///
+                    df ///
+                })) ///
+            }, error = function(e) { ///
+                cat("  Comparison table error:", e$message, "\n"); ///
+                NULL ///
+            }); ///
+            if (is.null(comp)) stop("Could not build comparison table."); ///
         } else if (length(results_list) == 1) { ///
-            comp <- as.data.frame(results_list[[1]]); ///
+            comp <- results_list[[1]]$estimates; ///
             comp$method <- names(results_list)[1]; ///
         } else { ///
             stop("No methods completed successfully.") ///
         }; ///
-        comp_df <- as.data.frame(comp); ///
+        comp_df <- comp; ///
         write.csv(comp_df, "`resultscsv'", row.names=TRUE); ///
         cat("SUCCESS\n")
 

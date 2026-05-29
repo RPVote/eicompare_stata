@@ -1,6 +1,6 @@
-*! ei_good v1.0.0 - Goodman's ecological regression via eiCompare
+*! ei_good v1.0.1 - Goodman's ecological regression via eiCompare
 *! Author: Loren Collingwood
-*! Date: 2026-05-21
+*! Date: 2026-05-28
 
 program define ei_good, rclass
     version 14.0
@@ -82,7 +82,7 @@ program define ei_good, rclass
         }, error = function(e) { ///
             stop(paste("eiCompare ei_good() error:", e$message)) ///
         }); ///
-        res_df <- as.data.frame(results); ///
+        res_df <- results$estimates; ///
         write.csv(res_df, "`resultscsv'", row.names=TRUE); ///
         cat("SUCCESS\n")
 

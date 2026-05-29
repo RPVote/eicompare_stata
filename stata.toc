@@ -1,4 +1,4 @@
-v 1.0.0
+v 1.0.1
 d eicompare_stata
 d Stata wrappers for the eiCompare R package
 d Loren Collingwood, University of New Mexico

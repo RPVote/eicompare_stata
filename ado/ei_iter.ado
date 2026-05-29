@@ -1,6 +1,6 @@
-*! ei_iter v1.0.0 - Iterative EI (King's method) via eiCompare
+*! ei_iter v1.0.1 - Iterative EI (King's method) via eiCompare
 *! Author: Loren Collingwood
-*! Date: 2026-05-21
+*! Date: 2026-05-28
 
 program define ei_iter, rclass
     version 14.0
@@ -98,7 +98,7 @@ program define ei_iter, rclass
         }, error = function(e) { ///
             stop(paste("eiCompare ei_iter() error:", e$message)) ///
         }); ///
-        res_df <- as.data.frame(results); ///
+        res_df <- results$estimates; ///
         write.csv(res_df, "`resultscsv'", row.names=TRUE); ///
         cat("SUCCESS\n")
 

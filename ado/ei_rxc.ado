@@ -1,6 +1,6 @@
-*! ei_rxc v1.0.0 - RxC Bayesian EI via eiCompare
+*! ei_rxc v1.0.1 - RxC Bayesian EI via eiCompare
 *! Author: Loren Collingwood
-*! Date: 2026-05-21
+*! Date: 2026-05-28
 
 program define ei_rxc, rclass
     version 14.0
@@ -112,7 +112,7 @@ program define ei_rxc, rclass
         }, error = function(e) { ///
             stop(paste("eiCompare ei_rxc() error:", e$message)) ///
         }); ///
-        res_df <- as.data.frame(results); ///
+        res_df <- results$estimates; ///
         write.csv(res_df, "`resultscsv'", row.names=TRUE); ///
         cat("SUCCESS\n")
 
